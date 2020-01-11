@@ -6,7 +6,7 @@ let router = express.Router();
     router.get("/", function(req, res) {
         burgers.all(function(data) {
         let hbsObject = {
-            burger_name: data
+            burgers: data
         };
         console.log(hbsObject);
         res.render("index", hbsObject);
@@ -15,9 +15,10 @@ let router = express.Router();
     
     router.post("/api/burgers", function(req, res) {
         burgers.create([
-        "name", "sleepy"
+        "burger_name", "devoured"
         ], [
-        req.body.name, req.body.sleepy
+        req.body.burger_name, 
+        req.body.devoured
         ], function(result) {
         // Send back the ID of the new quote
         res.json({ id: result.insertId });
@@ -25,12 +26,12 @@ let router = express.Router();
     });
     
     router.put("/api/burgers/:id", function(req, res) {
-        var condition = "id = " + req.params.id;
+        let condition = "id = " + req.params.id;
     
         console.log("condition", condition);
     
         burgers.update({
-        sleepy: req.body.sleepy
+        devoured: req.body.devoured
         }, condition, function(result) {
         if (result.changedRows == 0) {
             // If no rows were changed, then the ID must not exist, so 404
