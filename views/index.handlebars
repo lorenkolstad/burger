@@ -1,4 +1,4 @@
-<!--Jumbotron-->
+{{!-- <!--Jumbotron-->
     <div class="jumbotron">
         <h1 class="display-4">Eat-Da-Burger</h1>
             <p class="lead">Select a burger or create one to devour later!</p>
@@ -79,4 +79,64 @@
     </div>
 
     <button type="submit">Add Cat</button>
-</form>
+</form> --}}
+
+<div class="container">
+
+    <div class="jumbotron">
+        <h1 class="display-4">Create and Devour!</h1>
+        <p class="lead">Here you can create and or devour burgers.</p>
+        <hr class="my-4">
+        <p>Get creative!</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form>
+                <div class="form-group">
+                    <label>Burger Name</label>
+                    <input id="burger-name" type="text" class="form-control" aria-describedby="burgerName"
+                        placeholder="Create a burger">
+                    <small id="createBurger" class="form-text text-muted">Yum, yum.</small>
+                </div>
+
+                <button id="burger-submit" type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 not-devoured">
+
+            {{#each hbObj}}
+            {{#unless this.devoured}}
+
+
+            <div class="card" style="width: 18rem;">
+
+                <div class="card-body">
+                    <h5 class="card-title">{{this.burger_name}}</h5>
+                    <button data-id={{this.id}} class="devour" type="submit" class="btn btn-primary">Devour</button>
+
+                </div>
+            </div>
+            {{/unless}}
+            {{/each}}
+        </div>
+        <div class="col-md-6 devoured">
+            {{#each hbObj}}
+            {{#if this.devoured}}
+
+
+            <div class="card" style="width: 18rem;">
+
+                <div class="card-body">
+                    <h5 class="card-title">{{this.burger_name}}</h5>
+
+                </div>
+            </div>
+            {{/if}}
+            {{/each}}
+        </div>
+    </div>
+</div>
